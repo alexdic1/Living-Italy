@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Italy Through Time</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Merriweather&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Merriweather', serif;
+      background-color: #fdf6e3;
+      color: #2c2c2c;
+    }
+    header {
+      background-color: #6b4c3b;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2em;
+      margin-top: 0;
+    }
+    #map {
+      height: 400px;
+      margin: 20px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ITALY THROUGH TIME</h1>
+    <p>Discover the Origins of Rome</p>
+  </header>
+
+  <section class="grid">
+    <div class="card">
+      <h2>📜 The Legend of Romulus and Remus</h2>
+      <p>Learn how Rome was born from myth, twins, and a she-wolf on Palatine Hill.</p>
+    </div>
+    <div class="card">
+      <h2>👑 The Seven Kings of Rome</h2>
+      <p>Explore the rulers who shaped early Rome, from Romulus to Tarquinius Superbus.</p>
+    </div>
+    <div class="card">
+      <h2>⚖️ Birth of the Republic</h2>
+      <p>Discover how Romans overthrew tyranny and founded a Republic in 509 BC.</p>
+    </div>
+  </section>
+
+  <div id="map"></div>
+
+  <footer>
+    &copy; 2025 Italy Through Time. All rights reserved.
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([41.89, 12.49], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const points = [
+      { name: "Palatine Hill", coords: [41.8894, 12.4881], link: "https://goo.gl/maps/YVq8vJvYg2tVbRAy7" },
+      { name: "Albano Laziale (Alba Longa)", coords: [41.7306, 12.6546], link: "https://goo.gl/maps/N9iQQN8rA3hMPzNq5" },
+      { name: "Ostia Antica", coords: [41.7506, 12.2998], link: "https://goo.gl/maps/nT6VvAMK7kSz9Wvv9" }
+    ];
+
+    points.forEach(p => {
+      const marker = L.marker(p.coords).addTo(map);
+      marker.bindPopup(`<strong>${p.name}</strong><br><a href="${p.link}" target="_blank">View on Google Maps</a>`);
+    });
+  </script>
+</body>
+</html>
